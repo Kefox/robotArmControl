@@ -1,0 +1,95 @@
+<Window x:Class="RobotControl.MainWindow"
+        xmlns:sharpGL="clr-namespace:SharpGL.WPF;assembly=SharpGL.WPF"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Robot Control 3D" 
+        Height="600" 
+        Width="900"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        KeyDown="KeyHandler"
+        >
+
+<Window.Resources>
+    <Style x:Key="Triggers" TargetType="Button">
+        <Setter Property="Background" Value="#FF1E1E1E"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#800000"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</Window.Resources>
+
+<WindowChrome.WindowChrome>
+    <WindowChrome CornerRadius="15"  GlassFrameThickness="0" CaptionHeight="35" ResizeBorderThickness="{x:Static SystemParameters.WindowResizeBorderThickness}" />
+</WindowChrome.WindowChrome>
+
+    <Grid Name="Grid">
+
+        <Grid.RowDefinitions>
+            
+            <RowDefinition Height="35"/> 
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#FF1E1E1E">
+            <TextBlock 
+                       Text="Robot Control 3D" 
+                       Foreground="White" 
+                       VerticalAlignment="Center" 
+                       Margin="15,0,0,0" 
+                       FontWeight="Bold"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Button
+                WindowChrome.IsHitTestVisibleInChrome="True"
+                Click="screenSizeChange"
+                Height="35"
+                Width="35"
+                Content="▢"
+                FontSize="13"
+                FontWeight="Bold"
+                BorderThickness="0"
+                HorizontalAlignment="Right"
+                Style="{StaticResource Triggers}"
+            />
+            <Button
+                WindowChrome.IsHitTestVisibleInChrome="True"
+                Click="CloseApp"
+                Height="35"
+                Width="35"
+                Content="✖"
+                FontSize="9"
+                BorderThickness="0"
+                HorizontalAlignment="Right"
+                Style="{StaticResource Triggers}"
+            />
+            </StackPanel>
+        </Grid>
+    
+        <Grid 
+            Grid.Row = "1" 
+            x:Name="ViewportContainer"                 
+            >
+            <sharpGL:OpenGLControl 
+                x:Name="glControl" 
+                OpenGLDraw="OpenGLControl_OpenGLDraw"
+                MouseWheel="MouseWheelHandler"
+                MouseMove="MouseMovementHandler"
+            />   
+        </Grid>
+    </Grid>
+
+</Window>
