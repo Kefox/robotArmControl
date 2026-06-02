@@ -215,7 +215,7 @@ namespace RobotControl
             float newZ = delta.X*(float)Cos(angleHorizontalLower)*(float)Sin(angleVerticalLower) + delta.Y*(float)Sin(angleHorizontalLower)*(float)Sin(angleVerticalLower) + delta.Z*(float)Cos(angleVerticalLower);
 
             Vector3 rotatedPos = new Vector3(newX, newY, newZ);
-            float angleHorizontalUpper = (float)Math.Atan2(rotatedPos.Y, rotatedPos.X)-(float)PI/2;
+            float angleHorizontalUpper = (float)Math.Atan2(rotatedPos.Y, rotatedPos.X);
             float angleVerticalUpper;
             if (Math.Abs(rotatedPos.X) < treshold && Math.Abs(rotatedPos.Y) < treshold)
             {
